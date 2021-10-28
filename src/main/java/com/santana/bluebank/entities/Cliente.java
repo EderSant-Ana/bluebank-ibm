@@ -12,6 +12,8 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +27,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 
 import lombok.Data;
@@ -63,13 +64,14 @@ public class Cliente implements Serializable{
 	@Email
 	private String email;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "regime_contratacao")
 	private TipoRegimeEmpregaticio tipoRegimeEmpregaticio;
 	
 	@Column(name = "renda_mensal")
 	private BigDecimal rendaMensalIndividual;
 
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToOne(mappedBy = "cliente")
 	private Conta conta;
 

@@ -81,8 +81,8 @@ ON C.CLIENTE_ID = E.CLIENTE_ID
 WHERE E.CLIENTE_ID = 3;       
 */
 
-INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('999.999.999-99', 'jose@gmail.com', 38, 'José Santos', 2, 0.00);
-INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('111.111.111-11', 'maria@gmail.com', 36, 'Maria Alves', 0, 10000.00);
+INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('999.999.999-99', 'jose@gmail.com', 38, 'José Santos', 'ASSISTENCIAL', 0.00);
+INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('111.111.111-11', 'maria@gmail.com', 36, 'Maria Alves', 'FORMAL', 10000.00);
 
 INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '11980586008');
 INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '11969724155');
@@ -92,5 +92,5 @@ INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (2, '11999999999
 INSERT INTO tb_enderecos (bairro, cep, complemento, logradouro, numero, cliente_id, estado, cidade) VALUES ('Jardim das Maravilhas', '09251010', 'Apartamento 1', 'Rua Algeciras', '530', 1, 'SP', 'Santo André');
 INSERT INTO tb_enderecos (bairro, cep, complemento, logradouro, numero, cliente_id, estado, cidade) VALUES ('Vila Industrial', '03254240', 'Casa Frente', 'Rua Água Bonita', '230', 2, 'SP', 'São Paulo');
 
-INSERT INTO tb_conta (limite_disponivel, cliente_id) VALUES (600.00, 1);
-INSERT INTO tb_conta (limite_disponivel, cliente_id) VALUES (8000.00, 2);
+INSERT INTO tb_conta (agencia, limite_disponivel, cliente_id, numero_conta) VALUES ('0001', 600.00, 1, '93693-5');
+INSERT INTO tb_conta (agencia, limite_disponivel, cliente_id, numero_conta) VALUES ('0001', 8000.00, 2, '71006-5');

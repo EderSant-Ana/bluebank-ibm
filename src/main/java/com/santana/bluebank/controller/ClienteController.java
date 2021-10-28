@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.santana.bluebank.entities.Cliente;
+import com.santana.bluebank.entities.Conta;
 import com.santana.bluebank.repository.ClienteRepository;
+import com.santana.bluebank.repository.ContaRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -22,12 +24,16 @@ import lombok.AllArgsConstructor;
 public class ClienteController {
 
 	private ClienteRepository clienteRepository;
+	private ContaRepository contaRepository;
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/clientes")
 	public Cliente createEmployee(@RequestBody Cliente cliente) {
-
-		return clienteRepository.save(cliente);
+		
+		Cliente clienteSaved = clienteRepository.save(cliente);
+		clienteSaved.setConta(contaRepository.save(new Conta(null, cliente)));
+		
+		return clienteSaved;
 	}
 	
 	@GetMapping(value = "/clientes")

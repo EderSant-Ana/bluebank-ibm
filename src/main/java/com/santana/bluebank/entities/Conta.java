@@ -14,7 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
+import com.santana.bluebank.utils.GerarNumeroConta;
 
 import lombok.NoArgsConstructor;
 
@@ -29,6 +31,12 @@ public class Conta implements Serializable{
 	@Column(name = "id_conta")
 	private Integer id;
 	
+	private final String agencia = "0001";
+	
+	@Column(name = "numero_conta")
+	private String numeroConta = GerarNumeroConta.gerarNumeroConta();
+	
+	@JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
 	private Cliente cliente;
@@ -52,6 +60,11 @@ public class Conta implements Serializable{
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
+	public String getAgencia() {
+		return agencia;
+	}
+
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
@@ -62,17 +75,29 @@ public class Conta implements Serializable{
 	}
 
 	public BigDecimal setLimiteDisponivel(Cliente cliente) {
-		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.Desempregado) {
+		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) {
 			this.limiteDisponivel = new BigDecimal(600.00);
 		}
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.Formal) {
+		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL) {
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.80));
 		}
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.Informal) {
+		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.INFORMAL) {
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.50));
 		}	
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
+	
+	public String getNumeroConta() {
+		return numeroConta;
+	}
+
+	@Override
+	public String toString() {
+		return "Conta [id=" + id + ", agencia=" + agencia + ", cliente=" + cliente + ", limiteDisponivel="
+				+ limiteDisponivel + "]";
+	}
+
+
 
 
 
