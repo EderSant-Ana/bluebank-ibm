@@ -8,7 +8,7 @@ public enum TipoRegimeEmpregaticio {
 	
 	private String description;
 	
-	TipoRegimeEmpregaticio(String description){
+	private TipoRegimeEmpregaticio(String description){
 		this.description = description;
 	}
 	

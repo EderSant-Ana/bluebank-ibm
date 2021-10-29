@@ -34,7 +34,7 @@ public class Conta implements Serializable{
 	private final String agencia = "0001";
 	
 	@Column(name = "numero_conta")
-	private String numeroConta = GerarNumeroConta.gerarNumeroConta();
+	private String numeroConta;
 	
 	@JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
@@ -46,7 +46,8 @@ public class Conta implements Serializable{
 	public Conta(Integer id, Cliente cliente) {
 		this.id = id;
 		this.cliente = cliente;
-		this.limiteDisponivel = setLimiteDisponivel(cliente);
+		this.numeroConta = GerarNumeroConta.gerarNumeroConta();
+		this.limiteDisponivel = definirLimiteDisponivel(cliente);
 	}
 
 	public Integer getId() {
@@ -73,8 +74,8 @@ public class Conta implements Serializable{
 	public BigDecimal getLimiteDisponivel() {
 		return limiteDisponivel;
 	}
-
-	public BigDecimal setLimiteDisponivel(Cliente cliente) {
+	
+	public BigDecimal definirLimiteDisponivel(Cliente cliente) {
 		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) {
 			this.limiteDisponivel = new BigDecimal(600.00);
 		}
@@ -87,6 +88,10 @@ public class Conta implements Serializable{
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
 	
+	public void setLimiteDisponivel(BigDecimal limiteDisponivel) {
+		this.limiteDisponivel = limiteDisponivel;
+	}
+
 	public String getNumeroConta() {
 		return numeroConta;
 	}
@@ -96,6 +101,8 @@ public class Conta implements Serializable{
 		return "Conta [id=" + id + ", agencia=" + agencia + ", cliente=" + cliente + ", limiteDisponivel="
 				+ limiteDisponivel + "]";
 	}
+
+
 
 
 

@@ -28,7 +28,7 @@ public class ClienteController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/clientes")
-	public Cliente createEmployee(@RequestBody Cliente cliente) {
+	public Cliente createCliente(@RequestBody Cliente cliente) {
 		
 		Cliente clienteSaved = clienteRepository.save(cliente);
 		clienteSaved.setConta(contaRepository.save(new Conta(null, cliente)));

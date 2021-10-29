@@ -31,6 +31,7 @@ import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tb_clientes")
@@ -71,7 +72,7 @@ public class Cliente implements Serializable{
 	@Column(name = "renda_mensal")
 	private BigDecimal rendaMensalIndividual;
 
-	//@JsonIgnore
+	@ToString.Exclude
 	@OneToOne(mappedBy = "cliente")
 	private Conta conta;
 
