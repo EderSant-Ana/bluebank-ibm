@@ -18,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_conta")
 @NoArgsConstructor
+@Data
 public class Conta implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -49,31 +51,6 @@ public class Conta implements Serializable{
 		this.numeroConta = GerarNumeroConta.gerarNumeroConta();
 		this.limiteDisponivel = definirLimiteDisponivel(cliente);
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-	
-	public String getAgencia() {
-		return agencia;
-	}
-
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	public BigDecimal getLimiteDisponivel() {
-		return limiteDisponivel;
-	}
 	
 	public BigDecimal definirLimiteDisponivel(Cliente cliente) {
 		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) {
@@ -87,29 +64,6 @@ public class Conta implements Serializable{
 		}	
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
-	
-	public void setLimiteDisponivel(BigDecimal limiteDisponivel) {
-		this.limiteDisponivel = limiteDisponivel;
-	}
 
-	public String getNumeroConta() {
-		return numeroConta;
-	}
-
-	@Override
-	public String toString() {
-		return "Conta [id=" + id + ", agencia=" + agencia + ", cliente=" + cliente + ", limiteDisponivel="
-				+ limiteDisponivel + "]";
-	}
-
-
-
-
-
-
-
-	
-	
-	
 	
 }
