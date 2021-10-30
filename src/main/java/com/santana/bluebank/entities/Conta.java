@@ -53,15 +53,14 @@ public class Conta implements Serializable{
 	}
 	
 	public BigDecimal definirLimiteDisponivel(Cliente cliente) {
-		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) {
+		
+		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) 
 			this.limiteDisponivel = new BigDecimal(600.00);
-		}
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL) {
+		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL)
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.80));
-		}
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.INFORMAL) {
+		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.INFORMAL) 
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.50));
-		}	
+	
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
 
