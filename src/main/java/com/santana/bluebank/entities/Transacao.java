@@ -31,10 +31,12 @@ public class Transacao implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String banco;
-	private String agencia;
+	private String banco = "Blue-Bank";
+	private String agencia = "0001";
 	private String numeroContaOrigem;
+	private String nomeDepositante;
 	private String numeroContaDestino;
+	private String nomeDestinatario;
 	
 	@Enumerated(EnumType.STRING)
 	private TipoOperacao operacao;

@@ -22,22 +22,26 @@ public class TransacoesController {
 
 	private TransacoesRepository transacoesRepository;
 	private ContaRepository contaRepository;
-	
+
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/transferencia")
 	public Transacao realizarTransferencia(@RequestBody Transacao obj) {
-		
+
 		Conta contaOrigem = contaRepository.findByNumeroConta(obj.getNumeroContaOrigem());
 		System.out.println(contaOrigem);
+
+		obj.setNomeDepositante(contaOrigem.getCliente().getNome());
+
 		Conta contaDestino = contaRepository.findByNumeroConta(obj.getNumeroContaDestino());
+
+		obj.setNomeDestinatario(contaDestino.getCliente().getNome());
 
 		contaOrigem.setLimiteDisponivel(contaOrigem.getLimiteDisponivel().subtract(obj.getValor()));
 		contaDestino.setLimiteDisponivel(contaDestino.getLimiteDisponivel().add(obj.getValor()));
-		
+
 		Transacao objSaved = transacoesRepository.save(obj);
 		return objSaved;
 
-	
 	}
-	
+
 }

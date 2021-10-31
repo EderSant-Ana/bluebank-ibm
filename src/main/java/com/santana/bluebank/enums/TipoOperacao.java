@@ -2,7 +2,6 @@ package com.santana.bluebank.enums;
 
 public enum TipoOperacao {
 	
-	DEPOSITO("Depósito"),
 	TRANSFERENCIA("Transferencia");
 
 	private String descricao;
