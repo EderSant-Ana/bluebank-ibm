@@ -25,24 +25,24 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_conta")
 @NoArgsConstructor
 @Data
-public class Conta implements Serializable{
+public class Conta implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_conta")
 	private Integer id;
-	
+
 	private final String agencia = "0001";
-	
+
 	@Column(name = "numero_conta")
 	private String numeroConta;
-	
+
 	@JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_id", referencedColumnName = "cliente_id")
 	private Cliente cliente;
-	
+
 	private BigDecimal limiteDisponivel;
 
 	public Conta(Integer id, Cliente cliente) {
@@ -51,18 +51,17 @@ public class Conta implements Serializable{
 		this.numeroConta = GerarNumeroConta.gerarNumeroConta();
 		this.limiteDisponivel = definirLimiteDisponivel(cliente);
 	}
-	
+
 	public BigDecimal definirLimiteDisponivel(Cliente cliente) {
-		
-		if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL) 
+
+		if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL)
 			this.limiteDisponivel = new BigDecimal(600.00);
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL)
+		else if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL)
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.80));
-		else if(cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.INFORMAL) 
+		else if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.INFORMAL)
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.50));
-	
+
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
 
-	
 }
