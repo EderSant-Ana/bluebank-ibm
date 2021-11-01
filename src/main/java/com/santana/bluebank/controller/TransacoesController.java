@@ -1,5 +1,6 @@
 package com.santana.bluebank.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import com.santana.bluebank.repository.TransacoesRepository;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/v1/transacoes")
+@RequestMapping("/v1/transacoes")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TransacoesController {
 
