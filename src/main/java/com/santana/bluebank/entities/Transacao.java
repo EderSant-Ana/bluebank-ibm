@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.santana.bluebank.enums.TipoOperacao;
@@ -33,18 +35,22 @@ public class Transacao implements Serializable{
 	private Integer id;
 	private String banco = "Blue-Bank";
 	private String agencia = "0001";
+	@NotBlank( )
 	private String numeroContaOrigem;
 	private String nomeDepositante;
+	@NotBlank
 	private String numeroContaDestino;
 	private String nomeDestinatario;
 	
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private TipoOperacao operacao;
 	
 	@Column(name = "data_hora_operacao")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
 	private final LocalDateTime data = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
-	
+
+	@NotNull
 	private BigDecimal valor;
 
 	public Transacao(Integer id, String banco, String agencia, String numeroContaOrigem, String numeroContaDestino,
