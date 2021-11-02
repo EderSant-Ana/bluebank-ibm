@@ -1,21 +1,21 @@
 package com.santana.bluebank.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class ErrorMessage {
 
+	private Integer status;
     private Date data;
     private String message;
+    
+	public ErrorMessage(Integer status, Date data, String message) {
+		this.status = status;
+		this.data = data;
+		this.message = message;
+	}
 
-    public ErrorMessage(Date data, String message) {
-        this.data = data;
-        this.message = message;
-    }
+    
 }

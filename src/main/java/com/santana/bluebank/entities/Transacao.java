@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,10 +34,10 @@ public class Transacao implements Serializable{
 	private Integer id;
 	private String banco = "Blue-Bank";
 	private String agencia = "0001";
-	@NotBlank( )
+	//@NotBlank
 	private String numeroContaOrigem;
 	private String nomeDepositante;
-	@NotBlank
+	//@NotBlank
 	private String numeroContaDestino;
 	private String nomeDestinatario;
 	

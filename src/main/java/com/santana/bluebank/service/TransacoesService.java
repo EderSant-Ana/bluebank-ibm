@@ -1,14 +1,18 @@
 package com.santana.bluebank.service;
 
-import com.santana.bluebank.entities.Conta;
-import com.santana.bluebank.entities.Transacao;
-import com.santana.bluebank.exception.TransaçãoException;
-import com.santana.bluebank.repository.TransacoesRepository;
-import lombok.AllArgsConstructor;
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.santana.bluebank.entities.Conta;
+import com.santana.bluebank.entities.Transacao;
+import com.santana.bluebank.exception.ContaNaoEncontradaException;
+import com.santana.bluebank.exception.TransacaoException;
 import com.santana.bluebank.repository.ContaRepository;
-import java.math.BigDecimal;
+import com.santana.bluebank.repository.TransacoesRepository;
+
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -17,7 +21,7 @@ public class TransacoesService  {
     private ContaRepository contaRepository;
     private TransacoesRepository transacoesRepository;
 
-    public Transacao trasferir(Transacao obj) throws TransaçãoException {
+    public Transacao trasferir(Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
 
         Conta contaOrigem = verificaConta(obj.getNumeroContaOrigem());
         Conta contaDestino = verificaConta(obj.getNumeroContaDestino());
@@ -28,34 +32,36 @@ public class TransacoesService  {
 
                 if (verificaSaldo(contaOrigem.getLimiteDisponivel(), obj.getValor())) {
 
+                  	obj.setNomeDepositante(contaOrigem.getCliente().getNome());
                     contaOrigem.setLimiteDisponivel(contaOrigem.getLimiteDisponivel().subtract(obj.getValor()));
+                    obj.setNomeDestinatario(contaDestino.getCliente().getNome());
                     contaDestino.setLimiteDisponivel(contaDestino.getLimiteDisponivel().add(obj.getValor()));
 
                     Transacao objSaved = transacoesRepository.save(obj);
                     return objSaved;
 
                 }
-            }catch (TransaçãoException e){
-                throw new TransaçãoException(e.getMessage());
+            }catch (TransacaoException e){
+                throw new TransacaoException(e.getMessage());
 
             }
         }
 
-        throw new TransaçãoException("Conta não encontrada!");
+        throw new ContaNaoEncontradaException("Conta não encontrada!");
     }
 
 
     //Não permite fazer transferências com valor superior ao saldo em conta ou transferências de valores negativos ou zerados.
-    public boolean verificaSaldo(BigDecimal saldo, BigDecimal valorTransferencia) throws TransaçãoException{
+    public boolean verificaSaldo(BigDecimal saldo, BigDecimal valorTransferencia) throws TransacaoException{
 
         if (valorTransferencia.compareTo(saldo) > 0){
-            throw new TransaçãoException("Valor da transferência Maior que o Saldo disponível!");
+            throw new TransacaoException("Valor da transferência Maior que o Saldo disponível!");
 
         }else if(valorTransferencia.compareTo(new BigDecimal("0")) == 0){
-            throw new TransaçãoException("Valor da transferência não pode ser 0!");
+            throw new TransacaoException("Valor da transferência não pode ser 0!");
 
         }else if (valorTransferencia.compareTo(new BigDecimal("0")) < 0){
-            throw new TransaçãoException("Valor da transferência não pode ser negativo!");
+            throw new TransacaoException("Valor da transferência não pode ser negativo!");
 
         }
 
@@ -63,7 +69,7 @@ public class TransacoesService  {
     }
 
     //Verifica se as conta está cadastradas no banco.
-    public Conta verificaConta(String c) throws NullPointerException{
+    public Conta verificaConta(String c) throws ContaNaoEncontradaException{
 
         c = validaConta(c);
 
@@ -73,11 +79,11 @@ public class TransacoesService  {
                 return conta;
 
             }catch (NullPointerException e){
-                throw new NullPointerException("Conta não encontrada!");
+                throw new ContaNaoEncontradaException("Conta não encontrada!");
 
             }
         }else {
-            throw new NullPointerException("Confira o numero da conta!");
+            throw new ContaNaoEncontradaException("Confira o numero da conta!");
         }
 
     }

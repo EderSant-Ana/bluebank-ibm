@@ -1,7 +1,7 @@
 package com.santana.bluebank.controller;
 
-import com.santana.bluebank.exception.TransaçãoException;
-import io.swagger.annotations.Api;
+import com.santana.bluebank.exception.ContaNaoEncontradaException;
+import com.santana.bluebank.exception.TransacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +27,13 @@ public class TransacoesController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/transferencia")
-	public ResponseEntity<Transacao> realizarTransferencia(@Valid @RequestBody Transacao obj) {
+	public ResponseEntity<Transacao> realizarTransferencia(@Valid @RequestBody Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
 
 			Transacao objSaved = transacoesService.trasferir(obj);
 			return new ResponseEntity<Transacao>(objSaved, HttpStatus.OK);
 
 	}
+	
+	
 
 }
