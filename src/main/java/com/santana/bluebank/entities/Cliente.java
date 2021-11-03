@@ -23,7 +23,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -45,6 +47,7 @@ public class Cliente implements Serializable{
 	@Column(name = "cliente_id")
 	private Integer id;
 	
+	@NotEmpty
 	@Column(name = "nome", unique = true)	
 	private String nome;
 
@@ -52,19 +55,25 @@ public class Cliente implements Serializable{
 	@CPF
 	private String cpf;
 
+	@NotEmpty
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
+	@NotEmpty
 	@ElementCollection
 	@CollectionTable(name = "tb_telefones")
 	private Set<String> telefones = new HashSet<>();
 	
+	@NotNull
+	@Min(18)
 	private Integer idade;
 	
+	@NotEmpty
 	@Email
 	private String email;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "regime_contratacao")
 	private TipoRegimeEmpregaticio tipoRegimeEmpregaticio;
