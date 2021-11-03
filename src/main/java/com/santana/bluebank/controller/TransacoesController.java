@@ -29,7 +29,7 @@ public class TransacoesController {
 	@PostMapping(value = "/transferencia")
 	public ResponseEntity<Transacao> realizarTransferencia(@Valid @RequestBody Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
 
-			Transacao objSaved = transacoesService.trasferir(obj);
+			Transacao objSaved = transacoesService.transferir(obj);
 			return new ResponseEntity<Transacao>(objSaved, HttpStatus.OK);
 
 	}

@@ -27,4 +27,6 @@ public class ResourceExceptionHandler {
 		ErrorMessage err = new ErrorMessage(HttpStatus.NOT_FOUND.value(), new Date(), e.getLocalizedMessage());
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.NOT_FOUND);
 	}
+	
+	
 }
