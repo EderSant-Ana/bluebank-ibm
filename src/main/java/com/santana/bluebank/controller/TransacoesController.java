@@ -5,11 +5,7 @@ import com.santana.bluebank.exception.TransacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.santana.bluebank.entities.Transacao;
 import com.santana.bluebank.service.TransacoesService;
@@ -17,6 +13,7 @@ import com.santana.bluebank.service.TransacoesService;
 import lombok.AllArgsConstructor;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/transacoes")
@@ -31,6 +28,14 @@ public class TransacoesController {
 
 			Transacao objSaved = transacoesService.transferir(obj);
 			return new ResponseEntity<Transacao>(objSaved, HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/transferencia")
+	public ResponseEntity<List> getAllTransacaos() throws TransacaoException{
+
+			List<Transacao> list =  transacoesService.listarTransações();
+			return new ResponseEntity<List>(list, HttpStatus.OK);
 
 	}
 	

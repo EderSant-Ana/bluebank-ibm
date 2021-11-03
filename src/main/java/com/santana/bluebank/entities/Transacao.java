@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_transacoes")
 @NoArgsConstructor
 @Data
-public class Transacao implements Serializable{
+public class Transacao implements Serializable, Comparable<Transacao>{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -62,8 +62,17 @@ public class Transacao implements Serializable{
 		this.operacao = operacao;
 		this.valor = valor;
 	}
-	
-	
 
 
+	@Override
+	public int compareTo(Transacao transacao) {
+
+		if (this.data.isAfter(transacao.getData())) {
+			return -1;
+		} if (this.data.isBefore(transacao.getData())) {
+			return 1;
+		}
+		return 0;
+
+	}
 }

@@ -1,6 +1,9 @@
 package com.santana.bluebank.service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,6 +88,18 @@ public class TransacoesService {
 		}
 
 		return c;
+	}
+
+	public List<Transacao> listarTransações() throws TransacaoException{
+
+		List<Transacao> transacoes = transacoesRepository.findAll();
+
+		if(transacoes.isEmpty()) {
+			throw new TransacaoException("Nenhuma Transferência Realizada!");
+		}
+
+		Collections.sort(transacoes);
+		return transacoes;
 	}
 
 }
