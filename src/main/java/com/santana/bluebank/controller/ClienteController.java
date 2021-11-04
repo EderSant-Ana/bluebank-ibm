@@ -3,6 +3,8 @@ package com.santana.bluebank.controller;
 import java.util.List;
 
 import com.santana.bluebank.exception.ClienteJaCadastradoException;
+import com.santana.bluebank.exception.EmailInvalidoException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class ClienteController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/clientes")
-	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws ClienteJaCadastradoException {
+	public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws ClienteJaCadastradoException, EmailInvalidoException {
 		Cliente objSaved = clienteService.createCliente(cliente);
 		return new ResponseEntity<>(objSaved, HttpStatus.OK);
 	}
