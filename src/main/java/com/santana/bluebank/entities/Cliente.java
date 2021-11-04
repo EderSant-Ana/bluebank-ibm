@@ -51,7 +51,7 @@ public class Cliente implements Serializable{
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
 	@Pattern(regexp="^[A-Z a-z]*$",message = "Não são permitidos caracteres numéricos para o campo nome")
-	@Column(name = "nome", unique = true, nullable = false)	
+	@Column(name = "nome", nullable = false)	
 	private String nome;
 
 	@CPF
@@ -92,12 +92,13 @@ public class Cliente implements Serializable{
 	private Conta conta;
 
 	public Cliente(Integer id, String nome, @NotEmpty @CPF String cpf, Integer idade, String email,
-			TipoRegimeEmpregaticio tipoRegimeEmpregaticio, BigDecimal rendaMensalIndividual) {
+			TipoRegimeEmpregaticio tipoRegimeEmpregaticio, BigDecimal rendaMensalIndividual, List<Endereco> enderecos) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.email = email;
+		this.enderecos = enderecos;
 		this.tipoRegimeEmpregaticio = tipoRegimeEmpregaticio;
 		this.rendaMensalIndividual = rendaMensalIndividual;
 	}
