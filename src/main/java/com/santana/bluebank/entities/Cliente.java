@@ -26,7 +26,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
@@ -46,41 +48,43 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cliente_id")
 	private Integer id;
-	
-	@NotEmpty
-	@Column(name = "nome", nullable = false)
+
+	@NotEmpty(message="Nome é um atributo obrigatório")
+	@Pattern(regexp="^[A-Z a-z]*$",message = "Não são permitidos caracteres numéricos para o campo nome")
+	@Column(name = "nome", unique = true, nullable = false)	
 	private String nome;
 
-	@NotEmpty
 	@CPF
 	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
 
-	@NotEmpty
+	@NotEmpty(message="Endereço é um atributo obrigatório")
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	@NotEmpty
+	@NotEmpty(message="Telefone é um atributo obrigatório")
 	@ElementCollection
 	@CollectionTable(name = "tb_telefones")
 	private Set<String> telefones = new HashSet<>();
 	
-	@NotNull
-	@Min(18)
+	@NotNull(message="Idade é um atributo obrigatório")
+	@Range(min = 18,max= 120, message = "Idade não atende a política do BlueBank para abertura de conta") 
 	private Integer idade;
 	
-	@NotEmpty
+	@NotEmpty(message="E-mail é um atributo obrigatório")
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@NotNull
+	@NotNull(message="Regime Empregaticio é um atributo obrigatório")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "regime_contratacao")
 	private TipoRegimeEmpregaticio tipoRegimeEmpregaticio;
 	
 	@Column(name = "renda_mensal")
+	@Min(value=0, message = "O mínimo permitido para renda mensal individual é 0")
+	@NotNull(message="rendaMensalIndividual é um atributo obrigatório")
 	private BigDecimal rendaMensalIndividual;
 
 	@ToString.Exclude

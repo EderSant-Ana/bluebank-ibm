@@ -7,7 +7,6 @@ import com.santana.bluebank.entities.Cliente;
 import java.util.Optional;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
-
     Optional<Cliente> findByCpf(String cpf);
     boolean existsByCpf(String cpf);
 
