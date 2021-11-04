@@ -89,13 +89,9 @@ public class TransacoesService {
 		return c;
 	}
 
-	public List<Transacao> listarTransações() throws TransacaoException{
+	public List<Transacao> listarTransacoes(){
 
 		List<Transacao> transacoes = transacoesRepository.findAll();
-
-		if(transacoes.isEmpty()) {
-			throw new TransacaoException("Nenhuma Transferência Realizada!");
-		}
 
 		Collections.sort(transacoes);
 		return transacoes;

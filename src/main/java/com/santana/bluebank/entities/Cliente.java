@@ -92,7 +92,6 @@ public class Cliente implements Serializable{
 			TipoRegimeEmpregaticio tipoRegimeEmpregaticio, BigDecimal rendaMensalIndividual) {
 		this.id = id;
 		this.nome = nome;
-//		this.sobrenome = sobrenome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.email = email;
