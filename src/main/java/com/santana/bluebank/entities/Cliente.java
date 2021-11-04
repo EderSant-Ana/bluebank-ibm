@@ -22,11 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
@@ -69,15 +65,15 @@ public class Cliente implements Serializable{
 	private Set<String> telefones = new HashSet<>();
 	
 	@NotNull(message="Idade é um atributo obrigatório")
-	@Range(min = 18,max= 120, message = "Idade não atende a política do BlueBank para abertura de conta") 
+	@Range(min = 18, max= 90, message = "Idade não atende a política do BlueBank para abertura de conta") 
 	private Integer idade;
 	
-	@NotEmpty(message="E-mail é um atributo obrigatório")
+	@NotEmpty(message= "E-mail é um atributo obrigatório")
 	@Email
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@NotNull(message="Regime Empregaticio é um atributo obrigatório")
+	@NotNull(message= "Regime Empregaticio é um atributo obrigatório")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "regime_contratacao")
 	private TipoRegimeEmpregaticio tipoRegimeEmpregaticio;

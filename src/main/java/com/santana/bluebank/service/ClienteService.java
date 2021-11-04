@@ -59,7 +59,7 @@ public class ClienteService {
 		Matcher email_to_validate = valid_email_format.matcher(email);
 
 		if (!email_to_validate.matches()) {
-			throw new EmailInvalidoException("Por favor, insira um e-mail válido");
+			throw new EmailInvalidoException("O e-mail inserido é inválido");
 
 		}
 		return true;

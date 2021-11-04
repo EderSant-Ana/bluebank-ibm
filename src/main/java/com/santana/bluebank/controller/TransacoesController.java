@@ -1,42 +1,43 @@
 package com.santana.bluebank.controller;
 
-import com.santana.bluebank.exception.ContaNaoEncontradaException;
-import com.santana.bluebank.exception.TransacaoException;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.santana.bluebank.entities.Transacao;
+import com.santana.bluebank.exception.ContaNaoEncontradaException;
+import com.santana.bluebank.exception.TransacaoException;
 import com.santana.bluebank.service.TransacoesService;
 
 import lombok.AllArgsConstructor;
 
-import javax.validation.Valid;
-import java.util.List;
-
 @RestController
 @RequestMapping("/v1/transacoes")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class TransacoesController {
+public class TransacoesController implements TransacoesControllerDocs{
 
 	private TransacoesService transacoesService;
 
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.OK)
 	@PostMapping(value = "/transferencia")
-	public ResponseEntity<Transacao> realizarTransferencia(@Valid @RequestBody Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
+	public Transacao realizarTransferencia(@Valid @RequestBody Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
 
-			Transacao objSaved = transacoesService.transferir(obj);
-			return new ResponseEntity<Transacao>(objSaved, HttpStatus.OK);
-
+			return transacoesService.transferir(obj);
 	}
 
 	@GetMapping(value = "/transferencia")
-	public ResponseEntity<List<Transacao>> getAllTransacaos() throws TransacaoException{
+	public List<Transacao> getAllTransacoes(){
 
-			List<Transacao> list =  transacoesService.listarTransações();
-			return ResponseEntity.ok().body(list);
-
+			return transacoesService.listarTransacoes();
 	}
 	
 	
