@@ -27,6 +27,13 @@ public class ResourceExceptionHandler {
 		ErrorMessage err = new ErrorMessage(HttpStatus.NOT_FOUND.value(), new Date(), e.getLocalizedMessage());
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.NOT_FOUND);
 	}
+
+	@ExceptionHandler(ClienteJaCadastradoException.class)
+	public ResponseEntity<ErrorMessage> clienteJaCadastradoException(ClienteJaCadastradoException e, HttpServletRequest request) {
+
+		ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), e.getLocalizedMessage());
+		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+	}
 	
 	
 }

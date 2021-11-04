@@ -48,11 +48,12 @@ public class Cliente implements Serializable{
 	private Integer id;
 	
 	@NotEmpty
-	@Column(name = "nome", unique = true)	
+	@Column(name = "nome", nullable = false)
 	private String nome;
 
 	@NotEmpty
 	@CPF
+	@Column(name = "cpf", unique = true, nullable = false)
 	private String cpf;
 
 	@NotEmpty
@@ -71,6 +72,7 @@ public class Cliente implements Serializable{
 	
 	@NotEmpty
 	@Email
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
 	@NotNull
