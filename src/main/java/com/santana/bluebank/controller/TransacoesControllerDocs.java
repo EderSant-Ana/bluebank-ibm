@@ -17,7 +17,7 @@ public interface TransacoesControllerDocs {
 	@ApiOperation(value = "Operaçao de transferência entre contas")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Transferência realizada com sucesso"),
 			@ApiResponse(code = 400, message = "Campos obrigatórios ausentes ou dados incorretos"),
-			@ApiResponse(code = 404, message = "Contas de origem ou de destino não encontrada") })
+			@ApiResponse(code = 404, message = "Conta de origem ou de destino não encontrada") })
 	Transacao realizarTransferencia(Transacao obj) throws TransacaoException, ContaNaoEncontradaException;
 	
 	

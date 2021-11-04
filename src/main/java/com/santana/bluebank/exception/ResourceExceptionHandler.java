@@ -4,12 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,27 +67,9 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<ErrorMessage> contaNaoEncontradaException(HttpMessageNotReadableException e, HttpServletRequest request) {
 
 		ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), 
-				"JSON parse error: Verifique os dados informados não são permitidos campos vazios");
+				e.getLocalizedMessage());
         
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);    
-	}
-	
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity<ErrorMessage> contaNaoEncontradaException(DataIntegrityViolationException e, HttpServletRequest request) {
-
-		ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), 
-				"DataIntegrityViolationException: Não é possível cadastrar um cliente já existente na base de dados");
-        
-		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);    
-	}
-
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<ErrorMessage> nomeInvalido(ConstraintViolationException e, HttpServletRequest request) {
-
-		ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
-				"ConstraintViolationException: Nome ou sobrenome do cliente fora do padrão (mínimo de 3 caracteres)");
-
-		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);
 	}
 	
 }

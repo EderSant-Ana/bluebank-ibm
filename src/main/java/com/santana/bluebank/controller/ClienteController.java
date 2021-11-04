@@ -29,9 +29,10 @@ public class ClienteController implements ClienteControllerDocs{
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(value = "/clientes")
 	public Cliente createCliente(@Valid @RequestBody Cliente cliente) throws ClienteJaCadastradoException {
+		
 		return clienteService.createCliente(cliente);
 	}
-	
+
 	@GetMapping(value = "/clientes")
 	public List<Cliente> getAllClientes(){
 		return clienteService.findAll();
