@@ -34,10 +34,10 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 	private Integer id;
 	private String banco = "Blue-Bank";
 	private String agencia = "0001";
-	//@NotBlank
+
 	private String numeroContaOrigem;
 	private String nomeDepositante;
-	//@NotBlank
+
 	private String numeroContaDestino;
 	private String nomeDestinatario;
 	
