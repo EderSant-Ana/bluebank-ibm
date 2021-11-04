@@ -18,7 +18,8 @@ Hibernate:
         cpf varchar(255),
         email varchar(255),
         idade integer,
-        nome varchar(255),
+        nome varchar(50),
+        sobrenome varchar(100),
         renda_mensal decimal(19,2),
         regime_contratacao integer,
         primary key (cliente_id)
@@ -51,10 +52,7 @@ Hibernate:
        cliente_cliente_id integer not null,
         telefones varchar(255)
     )
-Hibernate: 
-    
-    alter table tb_clientes 
-       add constraint UK_bwjcxi7imn35cv71off722dlf unique (nome)
+
 Hibernate: 
     
     alter table tb_conta 

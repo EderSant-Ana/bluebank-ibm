@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -81,6 +82,14 @@ public class ResourceExceptionHandler {
         
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);    
 	}
-	
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ErrorMessage> nomeInvalido(ConstraintViolationException e, HttpServletRequest request) {
+
+		ErrorMessage err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
+				"ConstraintViolationException: Nome ou sobrenome do cliente fora do padrão (mínimo de 3 caracteres)");
+
+		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+	}
 	
 }

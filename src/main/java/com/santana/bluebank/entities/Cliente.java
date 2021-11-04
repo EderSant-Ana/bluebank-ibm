@@ -22,11 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.br.CPF;
@@ -50,8 +46,9 @@ public class Cliente implements Serializable{
 	private Integer id;
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
-	@Pattern(regexp="^[A-Z a-z]*$",message = "Não são permitidos caracteres numéricos para o campo nome")
-	@Column(name = "nome", unique = true, nullable = false)	
+	@Pattern(regexp="([A-Z][a-z]{2,} )([A-Z][a-z]{2,} )*?([A-Z][a-z]{2,})",
+			message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo de 3 caracteres em cada palavra.")
+	@Column(name = "nome", unique = true, nullable = false)
 	private String nome;
 
 	@CPF
@@ -95,6 +92,7 @@ public class Cliente implements Serializable{
 			TipoRegimeEmpregaticio tipoRegimeEmpregaticio, BigDecimal rendaMensalIndividual) {
 		this.id = id;
 		this.nome = nome;
+//		this.sobrenome = sobrenome;
 		this.cpf = cpf;
 		this.idade = idade;
 		this.email = email;
