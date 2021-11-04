@@ -51,7 +51,7 @@ public class Cliente implements Serializable{
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
 	@Pattern(regexp="^[A-Z a-z]*$",message = "Não são permitidos caracteres numéricos para o campo nome")
-	@Column(name = "nome", unique = true, nullable = false)	
+	@Column(name = "nome", nullable = false)	
 	private String nome;
 
 	@CPF
