@@ -20,6 +20,7 @@ public class SwaggerConfig {
      * Apis (define onde estão o controllers da minha api)
      * Paths (define quais os paths serão mapeados)
      * ApiInfo (Objeto ApiInfo)
+     * http://localhost:8080/api/swagger-ui.html
      */
     @Bean
     public Docket docket(){
