@@ -32,10 +32,10 @@ public class TransacoesController {
 	}
 
 	@GetMapping(value = "/transferencia")
-	public ResponseEntity<List> getAllTransacaos() throws TransacaoException{
+	public ResponseEntity<List<Transacao>> getAllTransacaos() throws TransacaoException{
 
 			List<Transacao> list =  transacoesService.listarTransações();
-			return new ResponseEntity<List>(list, HttpStatus.OK);
+			return ResponseEntity.ok().body(list);
 
 	}
 	

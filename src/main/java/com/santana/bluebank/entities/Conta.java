@@ -54,7 +54,9 @@ public class Conta implements Serializable {
 
 	public BigDecimal definirLimiteDisponivel(Cliente cliente) {
 
-		if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL)
+		if(cliente.getRendaMensalIndividual().compareTo(new BigDecimal("0")) == 0)
+			this.limiteDisponivel = new BigDecimal(600.00);
+		else if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.ASSISTENCIAL)
 			this.limiteDisponivel = new BigDecimal(600.00);
 		else if (cliente.getTipoRegimeEmpregaticio() == TipoRegimeEmpregaticio.FORMAL)
 			this.limiteDisponivel = cliente.getRendaMensalIndividual().multiply(new BigDecimal(0.80));
