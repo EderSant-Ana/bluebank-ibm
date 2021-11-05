@@ -3,14 +3,10 @@ package com.santana.bluebank.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +21,6 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -52,8 +47,7 @@ public class Cliente implements Serializable{
 	private Integer id;
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
-	@Pattern(regexp="([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})",
-	message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo 3 caracteres em cada palavra.")
+	@Pattern(regexp="([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.")
 	@Column(name = "nome", nullable = false)	
 	private String nome;
 
@@ -67,18 +61,11 @@ public class Cliente implements Serializable{
 	@JoinColumn(name = "cliente_id")
 	private List<Endereco> enderecos = new ArrayList<>();
 
-
 	@Valid
 	@NotEmpty(message="Telefone é um atributo obrigatório")
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_cliente_id")
 	private List<Telefone> telefones = new ArrayList<>();
-	
-//	@NotEmpty(message="Telefone é um atributo obrigatório")
-//	@ElementCollection
-//
-//	@CollectionTable(name = "tb_telefones")
-//	private Set<@NotBlank(message="Telefone é um atributo obrigatório")	String> telefones = new HashSet<>();
 	
 	@NotNull(message="Idade é um atributo obrigatório")
 	@Range(min = 18, max= 90, message = "Idade não atende a política do BlueBank para abertura de conta") 
@@ -116,10 +103,9 @@ public class Cliente implements Serializable{
 
 	//Utilizar esse construtor somente para testes
 	public Cliente(Integer id,
-			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo 3 caracteres em cada palavra.") String nome,
+			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.") String nome,
 			@CPF String cpf,
 			@NotEmpty(message = "Endereço é um atributo obrigatório") List<Endereco> enderecos,
-//			@NotEmpty(message = "Telefone é um atributo obrigatório") Set<String> telefones,
 			@NotEmpty(message = "Telefone é um atributo obrigatório") List<Telefone> telefones,
 			@NotNull(message = "Idade é um atributo obrigatório") @Range(min = 18, max = 90, message = "Idade não atende a política do BlueBank para abertura de conta") Integer idade,
 			@NotEmpty(message = "E-mail é um atributo obrigatório") @Email String email,
@@ -135,7 +121,4 @@ public class Cliente implements Serializable{
 		this.tipoRegimeEmpregaticio = tipoRegimeEmpregaticio;
 		this.rendaMensalIndividual = rendaMensalIndividual;
 	}
-	
-	
-
 }

@@ -82,9 +82,9 @@ WHERE E.CLIENTE_ID = 3;
 INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('999.999.999-99', 'jose@gmail.com', 38, 'José Santos', 'ASSISTENCIAL', 0.00);
 INSERT INTO tb_clientes (cpf, email, idade, nome, regime_contratacao, renda_mensal) VALUES ('111.111.111-11', 'maria@gmail.com', 36, 'Maria Alves', 'FORMAL', 10000.00);
 
-INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '11980586008');
-INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '11969724155');
-INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (2, '11999999999');
+INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '(11) 98058-6008');
+INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (1, '(11) 96972-4155');
+INSERT INTO tb_telefones (cliente_cliente_id, telefones) VALUES (2, '(11) 99999-9999');
 
 
 INSERT INTO tb_enderecos (bairro, cep, complemento, logradouro, numero, cliente_id, estado, cidade) VALUES ('Jardim das Maravilhas', '09251010', 'Apartamento 1', 'Rua Algeciras', '530', 1, 'SP', 'Santo André');

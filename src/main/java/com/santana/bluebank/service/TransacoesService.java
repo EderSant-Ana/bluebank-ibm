@@ -23,8 +23,12 @@ public class TransacoesService {
 	private ContaRepository contaRepository;
 	private TransacoesRepository transacoesRepository;
 
+	/*
+	 Método para realizar uma transferência
+	 @param obj
+	 @return Transacao
+	 */
 	public Transacao transferir(Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
-
 		Conta contaOrigem = verificaConta(obj.getNumeroContaOrigem());
 		Conta contaDestino = verificaConta(obj.getNumeroContaDestino());
 		Transacao transacaoSalva = null;
@@ -39,14 +43,16 @@ public class TransacoesService {
 			transacaoSalva = transacoesRepository.save(obj);
 
 		}
-
 		return transacaoSalva;
 	}
 
-	// Não permite fazer transferências com valor superior ao saldo em conta ou
-	// transferências de valores negativos ou zerados.
+	/*
+	 Método para validar o valor da transferência e saldo em conta, além de valores incorretos
+	 @param saldo
+	 @param valorTransferencia
+	 @return boolean
+	 */
 	public boolean verificaSaldo(BigDecimal saldo, BigDecimal valorTransferencia) throws TransacaoException {
-
 		if (valorTransferencia.compareTo(saldo) > 0) {
 			throw new TransacaoException("Valor da transferência Maior que o Saldo disponível!");
 
@@ -57,25 +63,29 @@ public class TransacoesService {
 			throw new TransacaoException("Valor da transferência não pode ser negativo!");
 
 		}
-
 		return true;
 	}
 
-	// Verifica se as conta está cadastradas no banco.
+	/*
+	 Método para validar se a conta existe no banco
+	 @param c
+	 @return boolean
+	 */
 	public Conta verificaConta(String c) throws ContaNaoEncontradaException {
-
 		c = validaConta(c);
 
 		Conta conta = contaRepository.findByNumeroConta(c)
 				.orElseThrow(() -> new ContaNaoEncontradaException("Conta não encontrada!"));
 
 		return conta;
-
 	}
 
-	// Valida numero da conta, caso esteja sem o `-` é adicionado
+	/*
+	 Método para validar se a conta existe (conta sem o '-')
+	 @param c
+	 @return boolean
+	 */
 	public String validaConta(String c) {
-
 		if (c.equals("") || c.length() < 6 || c.length() > 7) {
 			return null;
 
@@ -85,16 +95,17 @@ public class TransacoesService {
 			str.insert(5, "-");
 			return c = str.toString();
 		}
-
 		return c;
 	}
 
+	/*
+	 Método para listar todas as transações
+	 @return List<Transacao>
+	 */
 	public List<Transacao> listarTransacoes(){
-
 		List<Transacao> transacoes = transacoesRepository.findAll();
-
 		Collections.sort(transacoes);
+
 		return transacoes;
 	}
-
 }

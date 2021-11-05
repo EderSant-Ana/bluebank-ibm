@@ -20,8 +20,12 @@ public class ClienteService {
 	private ContaRepository contaRepository;
 	private ClienteRepository clienteRepository;
 
+	/*
+	 Método para cadastrar um novo Cliente e gerar uma nova Conta para ele
+	 @param obj
+	 @return Cliente
+	 */
 	public Cliente createCliente(Cliente obj) throws ClienteJaCadastradoException {
-
 		Cliente clienteSaved = null;
 
 		if(verificaCadastro(obj.getCpf(), obj.getEmail())){
@@ -31,14 +35,21 @@ public class ClienteService {
 		return clienteSaved;
 	}
 
+	/*
+	 Método para listar todos os clientes cadastrados
+	 @return List<Client>
+	 */
 	public List<Cliente> findAll() {
 		return clienteRepository.findAll();
 	}
 
-
-	// Não permite o cadastro de CPFs e e-mails já existentes no banco
+	/*
+	Método para validar se CPF ou E-mail informados no cadastro do Cliente já existem no banco
+	 @param cpf
+	 @param email
+	 @return boolean
+	 */
 	public boolean verificaCadastro(String cpf, String email) throws ClienteJaCadastradoException {
-
 		if (clienteRepository.existsByCpf(cpf)) {
 			throw new ClienteJaCadastradoException("Já existe um cliente cadastrado com este CPF!");
 
@@ -48,7 +59,4 @@ public class ClienteService {
 		}
 		return true;
 	}
-
-
-
 }

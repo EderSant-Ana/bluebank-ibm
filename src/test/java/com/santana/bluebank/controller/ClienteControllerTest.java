@@ -5,16 +5,13 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.santana.bluebank.entities.Telefone;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,21 +43,15 @@ class ClienteControllerTest {
 		List<Endereco> enderecos = new ArrayList<>();
 		Endereco e1 = new Endereco(Integer.valueOf(1), "Rua Rio Japurá", "793", "", "Perpétuo Socorro", "68905-540", "AP", "Macapá");
 		Endereco e2 = new Endereco(Integer.valueOf(2), "Rua Rio Japurá", "802", "", "Perpétuo Socorro", "68905-540", "AP", "Macapá");
-		
-		enderecos.addAll(Arrays.asList(e1, e2));
 
-		Cliente c2 = new Cliente();
-		c2.setId(Integer.valueOf(1));
+		enderecos.addAll(Arrays.asList(e1, e2));
 
 		List<Telefone> telefones = new ArrayList<>();
 		Telefone t1 = new Telefone(Integer.valueOf(1),"(96) 3938-1320");
 		Telefone t2 = new Telefone(Integer.valueOf(2),"(96) 3938-1320");
 
 		telefones.addAll(Arrays.asList(t1,t2));
-		
-//		Set<String> telefones = new HashSet<>();
-//		telefones.addAll(Arrays.asList("(96) 3938-1320", "(96) 98806-2952"));
-		
+
 		Cliente c1 = new Cliente(Integer.valueOf(1), "Giovanni Joaquim Miguel Nogueira", 
 				"931.291.356-50",  enderecos, telefones, Integer.valueOf(30), 
 				"giovannijoaquimmiguelnogueira@smbcontabil.com.br", TipoRegimeEmpregaticio.ASSISTENCIAL,
@@ -75,7 +66,6 @@ class ClienteControllerTest {
 		clientes.add(c1);
 
 		given(clienteContoller.getAllClientes()).willReturn(clientes);
-    
     }
 	
 	@Test

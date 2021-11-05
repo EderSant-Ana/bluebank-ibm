@@ -5,9 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.santana.bluebank.entities.Telefone;
 import org.junit.jupiter.api.Test;
@@ -37,7 +35,6 @@ class ClienteControllerTest2 {
         
     Cliente c1;
 
-
 	@Test
 	void testCreateCliente() throws Exception {
 		
@@ -47,16 +44,11 @@ class ClienteControllerTest2 {
 		
 		enderecos.addAll(Arrays.asList(e1, e2));
 
-
 		List<Telefone> telefones = new ArrayList<>();
 		Telefone t1 = new Telefone(Integer.valueOf(1),"(96) 3938-1320");
 		Telefone t2 = new Telefone(Integer.valueOf(2),"(96) 3938-1320");
 
 		telefones.addAll(Arrays.asList(t1,t2));
-		
-//		Set<String> telefones = new HashSet<>();
-//		telefones.addAll(Arrays.asList("(96) 3938-1320", "(96) 98806-2952"));
-		
 		c1 = new Cliente(Integer.valueOf(1), "Giovanni Joaquim Miguel Nogueira", 
 				"931.291.356-50",  enderecos, telefones, Integer.valueOf(30), 
 				"giovannijoaquimmiguelnogueira@smbcontabil.com.br", TipoRegimeEmpregaticio.ASSISTENCIAL,
@@ -66,9 +58,8 @@ class ClienteControllerTest2 {
 		conta1.setNumeroConta(GerarNumeroConta.gerarNumeroConta());
 		conta1.definirLimiteDisponivel(c1);
 		
-		c1.setConta(conta1);		
+		c1.setConta(conta1);
 
-		
 		String json = new ObjectMapper().writeValueAsString(c1);
 
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
@@ -80,5 +71,4 @@ class ClienteControllerTest2 {
 		mvc.perform(request)
 		.andExpect(status().isCreated());
 	}
-
 }
