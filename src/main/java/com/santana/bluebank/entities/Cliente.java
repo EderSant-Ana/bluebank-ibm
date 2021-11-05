@@ -52,8 +52,8 @@ public class Cliente implements Serializable{
 	private Integer id;
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
-	@Pattern(regexp="([A-Z][a-z]{2,} )([A-Z][a-z]{2,} )*?([A-Z][a-z]{2,})",
-	message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo de 3 caracteres em cada palavra.")
+	@Pattern(regexp="([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})",
+	message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo 3 caracteres em cada palavra.")
 	@Column(name = "nome", nullable = false)	
 	private String nome;
 
@@ -66,12 +66,19 @@ public class Cliente implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_id")
 	private List<Endereco> enderecos = new ArrayList<>();
-	
+
+
+	@Valid
 	@NotEmpty(message="Telefone é um atributo obrigatório")
-	@ElementCollection
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "cliente_cliente_id")
+	private List<Telefone> telefones = new ArrayList<>();
 	
-	@CollectionTable(name = "tb_telefones")
-	private Set<@NotBlank(message="Telefone é um atributo obrigatório")	String> telefones = new HashSet<>();
+//	@NotEmpty(message="Telefone é um atributo obrigatório")
+//	@ElementCollection
+//
+//	@CollectionTable(name = "tb_telefones")
+//	private Set<@NotBlank(message="Telefone é um atributo obrigatório")	String> telefones = new HashSet<>();
 	
 	@NotNull(message="Idade é um atributo obrigatório")
 	@Range(min = 18, max= 90, message = "Idade não atende a política do BlueBank para abertura de conta") 
@@ -109,10 +116,11 @@ public class Cliente implements Serializable{
 
 	//Utilizar esse construtor somente para testes
 	public Cliente(Integer id,
-			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([A-Z][a-z]{2,} )([A-Z][a-z]{2,} )*?([A-Z][a-z]{2,})", message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo de 3 caracteres em cada palavra.") String nome,
+			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo 3 caracteres em cada palavra.") String nome,
 			@CPF String cpf,
 			@NotEmpty(message = "Endereço é um atributo obrigatório") List<Endereco> enderecos,
-			@NotEmpty(message = "Telefone é um atributo obrigatório") Set<String> telefones,
+//			@NotEmpty(message = "Telefone é um atributo obrigatório") Set<String> telefones,
+			@NotEmpty(message = "Telefone é um atributo obrigatório") List<Telefone> telefones,
 			@NotNull(message = "Idade é um atributo obrigatório") @Range(min = 18, max = 90, message = "Idade não atende a política do BlueBank para abertura de conta") Integer idade,
 			@NotEmpty(message = "E-mail é um atributo obrigatório") @Email String email,
 			@NotNull(message = "Regime Empregaticio é um atributo obrigatório") TipoRegimeEmpregaticio tipoRegimeEmpregaticio,
