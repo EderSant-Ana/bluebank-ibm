@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.santana.bluebank.entities.Cliente;
 import com.santana.bluebank.entities.Conta;
 import com.santana.bluebank.entities.Endereco;
+import com.santana.bluebank.entities.Telefone;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
@@ -46,8 +47,8 @@ class ClienteControllerTest2 {
 		
 		enderecos.addAll(Arrays.asList(e1, e2));
 		
-		Set<String> telefones = new HashSet<>();
-		telefones.addAll(Arrays.asList("(96) 3938-1320", "(96) 98806-2952"));
+		Set<Telefone> telefones = new HashSet<>();
+		telefones.addAll(Arrays.asList(new Telefone(1, "(96) 3938-1320"), new Telefone(2, "(96) 98806-2952")));
 		
 		c1 = new Cliente(Integer.valueOf(1), "Giovanni Joaquim Miguel Nogueira", 
 				"931.291.356-50",  enderecos, telefones, Integer.valueOf(30), 

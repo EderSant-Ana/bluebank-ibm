@@ -66,7 +66,7 @@ public class Endereco implements Serializable{
 	@NotNull(message="Cidade é um campo obrigatório")
 	@Column(name = "cidade", nullable = false)
 	//@Pattern(regexp="^[A-Z a-z]*$",message = "Não são permitidos caracteres numéricos para o campo cidade")
-	@Pattern(regexp="^[a-zA-Z\\u0080-\\u024F\\s\\/\\-\\)\\(\\`\\.\\\"\\']+$",message = "Não são permitidos caracteres numéricos para o campo cidade")
+	@Pattern(regexp="^[a-z A-Z\\ \\u0080-\\u024F\\s\\/\\-\\)\\(\\`\\.\\\"\\']{2,60}+$",message = "Não são permitidos caracteres numéricos para o campo cidade")
 	private String cidade;
 	
 	@JsonIgnore
