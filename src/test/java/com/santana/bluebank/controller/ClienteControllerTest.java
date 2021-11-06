@@ -15,10 +15,13 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -29,6 +32,7 @@ import com.santana.bluebank.entities.Telefone;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
+@ActiveProfiles("test")
 @WebMvcTest(ClienteController.class)
 class ClienteControllerTest {
 
@@ -36,7 +40,7 @@ class ClienteControllerTest {
     private MockMvc mvc;
     
     @MockBean
-    private ClienteController clienteContoller;
+    private ClienteController clienteController;
     
     @BeforeEach
     public void setUp() {
@@ -65,7 +69,7 @@ class ClienteControllerTest {
 		List<Cliente> clientes = new ArrayList<>();
 		clientes.add(c1);
 
-		given(clienteContoller.getAllClientes()).willReturn(clientes);
+		given(clienteController.getAllClientes()).willReturn(clientes);
     }
 	
 	@Test

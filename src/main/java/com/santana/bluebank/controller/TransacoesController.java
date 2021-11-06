@@ -39,7 +39,4 @@ public class TransacoesController implements TransacoesControllerDocs{
 
 			return transacoesService.listarTransacoes();
 	}
-	
-	
-
 }

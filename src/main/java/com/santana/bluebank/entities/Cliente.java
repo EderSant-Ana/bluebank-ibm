@@ -66,6 +66,7 @@ public class Cliente implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_cliente_id")
 	private List<Telefone> telefones = new ArrayList<>();
+
 	
 	@NotNull(message="Idade é um atributo obrigatório")
 	@Range(min = 18, max= 90, message = "Idade não atende a política do BlueBank para abertura de conta") 
