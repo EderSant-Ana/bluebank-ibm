@@ -31,12 +31,18 @@ public class TransacoesControllerTest {
     @BeforeEach
     public void setUp() {
 
-        Transacao t = new Transacao(Integer.valueOf(1), "Blue-Bank", "0001",  "93693-5", "Jose",
+        Transacao t1 = new Transacao(Integer.valueOf(1), "Blue-Bank", "0001",  "93693-5", "José",
+                "71006-5", "Maria", TipoOperacao.TRANSFERENCIA, new BigDecimal(600.00));
+        Transacao t2 = new Transacao(Integer.valueOf(2), "Blue-Bank", "0001",  "93693-5", "José",
+                "71006-5", "Maria", TipoOperacao.TRANSFERENCIA, new BigDecimal(600.00));
+        Transacao t3 = new Transacao(Integer.valueOf(3), "Blue-Bank", "0001",  "93693-5", "José",
                 "71006-5", "Maria", TipoOperacao.TRANSFERENCIA, new BigDecimal(600.00));
 
 
         List<Transacao> transacaos = new ArrayList<>();
-        transacaos.add(t);
+        transacaos.add(t1);
+        transacaos.add(t2);
+        transacaos.add(t3);
 
         given(transacoesController.getAllTransacoes()).willReturn(transacaos);
 
