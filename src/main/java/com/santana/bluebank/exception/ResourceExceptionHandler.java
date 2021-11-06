@@ -57,6 +57,7 @@ public class ResourceExceptionHandler {
         	
             mensagem = messageSource.getMessage(fieldError.getCode(), fieldError.getArguments(), fieldError.getDefaultMessage(), LocaleContextHolder.getLocale());
     		err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), mensagem);
+    		break;
         }
         
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);

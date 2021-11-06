@@ -1,6 +1,5 @@
 package com.santana.bluebank.entities;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,3 +40,4 @@ public class Telefone implements Serializable {
         this.tel = tel;
     }
 }
+

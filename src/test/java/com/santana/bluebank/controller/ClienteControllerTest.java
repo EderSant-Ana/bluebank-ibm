@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.santana.bluebank.entities.Telefone;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.santana.bluebank.entities.Cliente;
 import com.santana.bluebank.entities.Conta;
 import com.santana.bluebank.entities.Endereco;
+import com.santana.bluebank.entities.Telefone;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 

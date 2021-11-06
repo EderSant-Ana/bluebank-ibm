@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.santana.bluebank.entities.Telefone;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.santana.bluebank.entities.Cliente;
 import com.santana.bluebank.entities.Conta;
 import com.santana.bluebank.entities.Endereco;
+import com.santana.bluebank.entities.Telefone;
 import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
@@ -49,7 +49,8 @@ class ClienteControllerTest2 {
 		Telefone t2 = new Telefone(Integer.valueOf(2),"(96) 3938-1320");
 
 		telefones.addAll(Arrays.asList(t1,t2));
-		c1 = new Cliente(Integer.valueOf(1), "Giovanni Joaquim Miguel Nogueira", 
+
+		c1 = new Cliente(Integer.valueOf(1), "Giovanni Joaquim Miguel Nogueira",
 				"931.291.356-50",  enderecos, telefones, Integer.valueOf(30), 
 				"giovannijoaquimmiguelnogueira@smbcontabil.com.br", TipoRegimeEmpregaticio.ASSISTENCIAL,
 				new BigDecimal("0"));
