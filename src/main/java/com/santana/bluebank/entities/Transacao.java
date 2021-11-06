@@ -52,13 +52,15 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 	@NotNull
 	private BigDecimal valor;
 
-	public Transacao(Integer id, String banco, String agencia, String numeroContaOrigem, String numeroContaDestino,
+	public Transacao(Integer id, String banco, String agencia, String nomeDepositante, String numeroContaOrigem, String numeroContaDestino, String nomeDestinatario,
 			TipoOperacao operacao, BigDecimal valor) {
 		this.id = id;
 		this.banco = banco;
 		this.agencia = agencia;
 		this.numeroContaOrigem = numeroContaOrigem;
+		this.nomeDepositante = nomeDepositante;
 		this.numeroContaDestino = numeroContaDestino;
+		this.nomeDestinatario = nomeDestinatario;
 		this.operacao = operacao;
 		this.valor = valor;
 	}
