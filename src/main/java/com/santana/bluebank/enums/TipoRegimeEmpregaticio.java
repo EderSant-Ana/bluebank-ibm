@@ -15,6 +15,4 @@ public enum TipoRegimeEmpregaticio {
 	public String getDescription() {
 		return description;
 	}
-	
-
 }

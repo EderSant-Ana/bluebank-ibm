@@ -19,8 +19,7 @@ public interface TransacoesControllerDocs {
 			@ApiResponse(code = 400, message = "Campos obrigatórios ausentes ou dados incorretos"),
 			@ApiResponse(code = 404, message = "Conta de origem ou de destino não encontrada") })
 	Transacao realizarTransferencia(Transacao obj) throws TransacaoException, ContaNaoEncontradaException;
-	
-	
+
 	@ApiOperation(value = "Retorna a lista de todas as transações realizadas no sistema")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Lista de todas as transações registradas no sistema")

@@ -45,8 +45,8 @@ public class Conta implements Serializable {
 
 	private BigDecimal limiteDisponivel;
 
-	public Conta(Integer id, Cliente cliente) {
-		this.id = id;
+	public Conta(Cliente cliente) {
+//		this.id = id;
 		this.cliente = cliente;
 		this.numeroConta = GerarNumeroConta.gerarNumeroConta();
 		this.limiteDisponivel = definirLimiteDisponivel(cliente);
@@ -65,5 +65,4 @@ public class Conta implements Serializable {
 
 		return this.limiteDisponivel.setScale(2, RoundingMode.HALF_EVEN);
 	}
-
 }

@@ -69,7 +69,6 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 		this.valor = valor;
 	}
 
-
 	@Override
 	public int compareTo(Transacao transacao) {
 
@@ -79,7 +78,6 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 			return 1;
 		}
 		return 0;
-
 	}
 
 	//Usar somente para testes

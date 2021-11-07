@@ -24,7 +24,6 @@ public class TransacoesService {
 	private TransacoesRepository transacoesRepository;
 
 	public Transacao transferir(Transacao obj) throws TransacaoException, ContaNaoEncontradaException {
-
 		Conta contaOrigem = verificaConta(obj.getNumeroContaOrigem());
 		Conta contaDestino = verificaConta(obj.getNumeroContaDestino());
 		Transacao transacaoSalva = null;
@@ -37,16 +36,13 @@ public class TransacoesService {
 			contaDestino.setLimiteDisponivel(contaDestino.getLimiteDisponivel().add(obj.getValor()));
 
 			transacaoSalva = transacoesRepository.save(obj);
-
 		}
-
 		return transacaoSalva;
 	}
 
 	// Não permite fazer transferências com valor superior ao saldo em conta ou
 	// transferências de valores negativos ou zerados.
 	public boolean verificaSaldo(BigDecimal saldo, BigDecimal valorTransferencia) throws TransacaoException {
-
 		if (valorTransferencia.compareTo(saldo) > 0) {
 			throw new TransacaoException("Valor da transferência Maior que o Saldo disponível!");
 
@@ -55,27 +51,22 @@ public class TransacoesService {
 
 		} else if (valorTransferencia.compareTo(new BigDecimal("0")) < 0) {
 			throw new TransacaoException("Valor da transferência não pode ser negativo!");
-
 		}
-
 		return true;
 	}
 
 	// Verifica se as conta está cadastradas no banco.
 	public Conta verificaConta(String c) throws ContaNaoEncontradaException {
-
 		c = validaConta(c);
 
 		Conta conta = contaRepository.findByNumeroConta(c)
 				.orElseThrow(() -> new ContaNaoEncontradaException("Conta não encontrada!"));
 
 		return conta;
-
 	}
 
 	// Valida numero da conta, caso esteja sem o `-` é adicionado
 	public String validaConta(String c) {
-
 		if (c.equals("") || c.length() < 6 || c.length() > 7) {
 			return null;
 
@@ -85,16 +76,13 @@ public class TransacoesService {
 			str.insert(5, "-");
 			return c = str.toString();
 		}
-
 		return c;
 	}
 
 	public List<Transacao> listarTransacoes(){
-
 		List<Transacao> transacoes = transacoesRepository.findAll();
 
 		Collections.sort(transacoes);
 		return transacoes;
 	}
-
 }

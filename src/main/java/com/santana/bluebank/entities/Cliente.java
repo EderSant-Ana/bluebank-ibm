@@ -123,7 +123,4 @@ public class Cliente implements Serializable{
 		this.tipoRegimeEmpregaticio = tipoRegimeEmpregaticio;
 		this.rendaMensalIndividual = rendaMensalIndividual;
 	}
-	
-	
-
 }

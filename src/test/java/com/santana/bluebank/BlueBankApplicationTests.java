@@ -9,5 +9,4 @@ class BlueBankApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

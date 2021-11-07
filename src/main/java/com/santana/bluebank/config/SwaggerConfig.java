@@ -52,5 +52,4 @@ public class SwaggerConfig {
     private Contact contact(){
         return new Contact("Rebooted Developer","","");
     }
-
 }

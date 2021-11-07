@@ -57,7 +57,7 @@ class ClienteControllerGetAllTest {
 				"giovannijoaquimmiguelnogueira@smbcontabil.com.br", TipoRegimeEmpregaticio.ASSISTENCIAL,
 				new BigDecimal("0"));
 
-		Conta conta1 = new Conta(1, c1);
+		Conta conta1 = new Conta(c1);
 		conta1.setNumeroConta(GerarNumeroConta.gerarNumeroConta());
 		conta1.definirLimiteDisponivel(c1);
 		

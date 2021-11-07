@@ -39,13 +39,12 @@ public class TransacoesControllerListarTransacoesTest {
                 "71006-5", "Maria", TipoOperacao.TRANSFERENCIA, new BigDecimal(600.00));
 
 
-        List<Transacao> transacaos = new ArrayList<>();
-        transacaos.add(t1);
-        transacaos.add(t2);
-        transacaos.add(t3);
+        List<Transacao> transacoes = new ArrayList<>();
+        transacoes.add(t1);
+        transacoes.add(t2);
+        transacoes.add(t3);
 
-        given(transacoesController.getAllTransacoes()).willReturn(transacaos);
-
+        given(transacoesController.getAllTransacoes()).willReturn(transacoes);
     }
 
     @Test

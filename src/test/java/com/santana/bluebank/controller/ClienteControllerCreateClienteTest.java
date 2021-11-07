@@ -37,7 +37,6 @@ class ClienteControllerCreateClienteTest {
         
     Cliente c1;
 
-
 	@Test
 	void dadoUmCliente_quandoForRealizadoPost_entaoDeveRetornarHttpStatusCreated() throws Exception {
 		
@@ -55,13 +54,12 @@ class ClienteControllerCreateClienteTest {
 				"giovannijoaquimmiguelnogueira@smbcontabil.com.br", TipoRegimeEmpregaticio.ASSISTENCIAL,
 				new BigDecimal("0"));
 
-		Conta conta1 = new Conta(1, c1);
+		Conta conta1 = new Conta(c1);
 		conta1.setNumeroConta(GerarNumeroConta.gerarNumeroConta());
 		conta1.definirLimiteDisponivel(c1);
 		
 		c1.setConta(conta1);		
 
-		
 		String json = new ObjectMapper().writeValueAsString(c1);
 
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
@@ -73,5 +71,4 @@ class ClienteControllerCreateClienteTest {
 		mvc.perform(request)
 		.andExpect(status().isCreated());
 	}
-
 }

@@ -59,9 +59,7 @@ public class ResourceExceptionHandler {
     		err = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), mensagem);
     		break;
         }
-        
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);
-        
 	}
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
@@ -72,5 +70,4 @@ public class ResourceExceptionHandler {
         
 		return new ResponseEntity<>(err, new HttpHeaders(), HttpStatus.BAD_REQUEST);    
 	}
-	
 }

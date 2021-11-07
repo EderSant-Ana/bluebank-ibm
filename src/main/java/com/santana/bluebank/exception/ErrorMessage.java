@@ -16,6 +16,4 @@ public class ErrorMessage {
 		this.date = date;
 		this.message = message;
 	}
-
-    
 }

@@ -21,12 +21,11 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 
 	public Cliente createCliente(Cliente obj) throws ClienteJaCadastradoException {
-
 		Cliente clienteSaved = null;
 
 		if(verificaCadastro(obj.getCpf(), obj.getEmail())){
 			clienteSaved = clienteRepository.save(obj);
-			clienteSaved.setConta(contaRepository.save(new Conta(null, clienteSaved)));
+			clienteSaved.setConta(contaRepository.save(new Conta(clienteSaved)));
 		}
 		return clienteSaved;
 	}
@@ -34,7 +33,6 @@ public class ClienteService {
 	public List<Cliente> findAll() {
 		return clienteRepository.findAll();
 	}
-
 
 	// Não permite o cadastro de CPFs e e-mails já existentes no banco
 	public boolean verificaCadastro(String cpf, String email) throws ClienteJaCadastradoException {
@@ -48,7 +46,4 @@ public class ClienteService {
 		}
 		return true;
 	}
-
-
-
 }
