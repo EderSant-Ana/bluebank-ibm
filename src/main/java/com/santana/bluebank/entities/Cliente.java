@@ -49,8 +49,7 @@ public class Cliente implements Serializable{
 	private Integer id;
 
 	@NotEmpty(message="Nome é um atributo obrigatório")
-	@Pattern(regexp="([A-Z][a-z]{2,} )([A-Z][a-z]{2,} )*?([A-Z][a-z]{2,})",
-	message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo de 3 caracteres em cada palavra.")
+	@Pattern(regexp="([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.")
 	@Column(name = "nome", nullable = false)	
 	private String nome;
 
@@ -106,7 +105,7 @@ public class Cliente implements Serializable{
 
 	//Utilizar esse construtor somente para testes
 	public Cliente(Integer id,
-			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([A-Z][a-z]{2,} )([A-Z][a-z]{2,} )*?([A-Z][a-z]{2,})", message = "Não são permitidos caracteres numéricos para o campo nome e são necessários no mínimo de 3 caracteres em cada palavra.") String nome,
+			@Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.") String nome,			
 			@CPF String cpf,
 			@NotEmpty(message = "Endereço é um atributo obrigatório") List<Endereco> enderecos,
 			@NotEmpty(message = "Telefone é um atributo obrigatório") Set<Telefone> telefones,

@@ -21,6 +21,7 @@ public class Telefone implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     @NotEmpty(message="Telefone é um campo obrigatório")
