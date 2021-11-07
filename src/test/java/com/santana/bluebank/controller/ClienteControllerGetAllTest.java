@@ -33,7 +33,7 @@ import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
 @WebMvcTest(ClienteController.class)
-class ClienteControllerTest {
+class ClienteControllerGetAllTest {
 
     @Autowired
     private MockMvc mvc;

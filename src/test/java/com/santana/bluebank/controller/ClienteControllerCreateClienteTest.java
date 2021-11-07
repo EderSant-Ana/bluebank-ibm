@@ -27,7 +27,7 @@ import com.santana.bluebank.enums.TipoRegimeEmpregaticio;
 import com.santana.bluebank.utils.GerarNumeroConta;
 
 @WebMvcTest(ClienteController.class)
-class ClienteControllerTest2 {
+class ClienteControllerCreateClienteTest {
 	
     @Autowired
     private MockMvc mvc;
@@ -39,7 +39,7 @@ class ClienteControllerTest2 {
 
 
 	@Test
-	void testCreateCliente() throws Exception {
+	void dadoUmCliente_quandoForRealizadoPost_entaoDeveRetornarHttpStatusCreated() throws Exception {
 		
 		List<Endereco> enderecos = new ArrayList<>();
 		Endereco e1 = new Endereco(Integer.valueOf(1), "Rua Rio Japurá", "793", "", "Perpétuo Socorro", "68905-540", "AP", "Macapá");
