@@ -58,6 +58,7 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime data = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("America/Sao_Paulo"));
 
+
 	@NotNull
 	private BigDecimal valor;
 
@@ -82,5 +83,20 @@ public class Transacao implements Serializable, Comparable<Transacao>{
 			return 1;
 		}
 		return 0;
+	}
+
+	//Usar somente para testes
+	public Transacao(Integer id, String banco, String agencia, String numeroContaOrigem, String nomeDepositante,
+			String numeroContaDestino, String nomeDestinatario, @NotNull TipoOperacao operacao,
+			@NotNull BigDecimal valor) {
+		this.id = id;
+		this.banco = banco;
+		this.agencia = agencia;
+		this.numeroContaOrigem = numeroContaOrigem;
+		this.nomeDepositante = nomeDepositante;
+		this.numeroContaDestino = numeroContaDestino;
+		this.nomeDestinatario = nomeDestinatario;
+		this.operacao = operacao;
+		this.valor = valor;
 	}
 }

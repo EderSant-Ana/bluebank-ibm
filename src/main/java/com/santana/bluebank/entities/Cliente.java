@@ -66,7 +66,6 @@ public class Cliente implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "cliente_cliente_id")
 	private List<Telefone> telefones = new ArrayList<>();
-
 	
 	@NotNull(message="Idade é um atributo obrigatório")
 	@Range(min = 18, max= 90, message = "Idade não atende a política do BlueBank para abertura de conta") 
@@ -104,7 +103,8 @@ public class Cliente implements Serializable{
 
 	//Utilizar esse construtor somente para testes
 	public Cliente(Integer id,
-			@NotEmpty(message = "Nome é um atributo obrigatório") @Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.") String nome,
+			@NotEmpty(message = "Nome é um atributo obrigatório")
+			@Pattern(regexp = "([\\p{L1}'-]{2,})+([\\p{L1}' -]{2,} )*?([\\p{L1}]{2,})", message = "Corrija os dados informados no campo nome.") String nome,
 			@CPF String cpf,
 			@NotEmpty(message = "Endereço é um atributo obrigatório") List<Endereco> enderecos,
 			@NotEmpty(message = "Telefone é um atributo obrigatório") List<Telefone> telefones,

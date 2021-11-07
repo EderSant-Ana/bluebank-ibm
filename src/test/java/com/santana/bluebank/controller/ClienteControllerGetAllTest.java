@@ -34,7 +34,7 @@ import com.santana.bluebank.utils.GerarNumeroConta;
 
 @ActiveProfiles("test")
 @WebMvcTest(ClienteController.class)
-class ClienteControllerTest {
+class ClienteControllerGetAllTest {
 
     @Autowired
     private MockMvc mvc;

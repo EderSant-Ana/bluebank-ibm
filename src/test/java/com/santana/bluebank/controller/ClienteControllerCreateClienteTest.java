@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ActiveProfiles("test")
 @WebMvcTest(ClienteController.class)
-class ClienteControllerTest2 {
+class ClienteControllerCreateClienteTest {
 	
     @Autowired
     private MockMvc mvc;
@@ -37,7 +37,7 @@ class ClienteControllerTest2 {
     Cliente c1;
 
 	@Test
-	void testCreateCliente() throws Exception {
+	void dadoUmCliente_quandoForRealizadoPost_entaoDeveRetornarHttpStatusCreated() throws Exception {
 		
 		List<Endereco> enderecos = new ArrayList<>();
 		Endereco e1 = new Endereco(Integer.valueOf(1), "Rua Rio Japurá", "793", "", "Perpétuo Socorro", "68905-540", "AP", "Macapá");
